@@ -33,7 +33,7 @@ module.exports = function(router, database) {
         }
         return null;
       });
-  }
+  };
   exports.login = login;
 
   router.post('/login', (req, res) => {
@@ -41,6 +41,7 @@ module.exports = function(router, database) {
       email,
       password
     } = req.body;
+
     login(email, password)
       .then(user => {
         if (!user) {
@@ -68,22 +69,14 @@ module.exports = function(router, database) {
 
   router.get("/me", (req, res) => {
     const userId = req.session.userId;
-    if (!userId) {
-      res.send({
-        message: "not logged in"
-      });
-      return;
-    }
-
+    if (!userId) return res.send({
+      message: "not logged in"
+    });
     database.getUserWithId(userId)
       .then(user => {
-        if (!user) {
-          res.send({
-            error: "no user with that id"
-          });
-          return;
-        }
-
+        if (!user) return res.send({
+          error: "no user with that id"
+        });
         res.send({
           user: {
             name: user.name,
@@ -96,4 +89,4 @@ module.exports = function(router, database) {
   });
 
   return router;
-}
+};
