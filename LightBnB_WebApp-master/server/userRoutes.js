@@ -26,9 +26,13 @@ module.exports = function(router, database) {
    * @param {String} password encrypted
    */
   const login = function(email, password) {
+    console.log('test');
     return database.getUserWithEmail(email)
       .then(user => {
+        console.log(bcrypt.compareSync('password', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'));
+
         if (bcrypt.compareSync(password, user.password)) {
+
           return user;
         }
         return null;
@@ -41,12 +45,12 @@ module.exports = function(router, database) {
       email,
       password
     } = req.body;
-
+    console.log(email, password);
     login(email, password)
       .then(user => {
         if (!user) {
           res.send({
-            error: "error"
+            error: "error test"
           });
           return;
         }
