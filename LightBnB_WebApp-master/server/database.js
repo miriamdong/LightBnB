@@ -115,9 +115,15 @@ const getAllProperties = function(options, limit = 10) {
   const queryParams = [];
   // 2
   let queryString = `
-  SELECT properties.*, avg(property_reviews.rating) as average_rating
+  SELECT properties.*,
+
+  CASE
+          WHEN property_reviews.rating IS NULL THEN '0'
+          ELSE avg(property_reviews.rating)
+          END AS average_rating
+
   FROM properties
-  JOIN property_reviews ON properties.id = property_id
+  FULL OUTER JOIN property_reviews ON properties.id = property_id
   JOIN users ON properties.owner_id = users.id
   `;
 
@@ -148,7 +154,7 @@ const getAllProperties = function(options, limit = 10) {
 
   // 4
   queryString += `
-  GROUP BY properties.id`;
+  GROUP BY properties.id, property_reviews.rating`;
 
   if (options.minimum_rating) {
     queryParams.push(`${ options.minimum_rating }`);
@@ -157,7 +163,7 @@ const getAllProperties = function(options, limit = 10) {
   }
   queryParams.push(limit);
   queryString += `
-  ORDER BY cost_per_night, average_rating
+  ORDER BY cost_per_night
   LIMIT $${ queryParams.length };
   `;
 
