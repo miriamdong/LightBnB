@@ -1,8 +1,8 @@
 INSERT INTO users(name, email, password)
 VALUES
-('Miu Miu', 'miu@miu.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u'),
-('Wall E', 'wall@e.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u'),
-('Mir D', 'mir@d.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u');
+('Miu Miu', 'miu@miu.com', '123'),
+('Wall E', 'wall@e.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'),
+('Mir D', 'mir@d.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 INSERT INTO properties (id, owner_id, title, description, thumbnail_photo_url , cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country, street, city, province, post_code, active)
 VALUES (1, 2, 'Chanel', 'description', 'thumbnail_photo_url' , 'cover_photo_url', 100, 2, 3, 1, 'USA', 'street1', 'city1', 'province1', 'postcode1', true),
